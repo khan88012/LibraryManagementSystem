@@ -1,0 +1,9 @@
+@LibraryManagementSystem.API_HostAddress = https://localhost:7028
+
+
+
+###
+
+GET {{LibraryManagementSystem.API_HostAddress}}/api/book
+
+###
