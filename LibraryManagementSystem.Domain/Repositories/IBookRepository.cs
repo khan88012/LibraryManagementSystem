@@ -8,6 +8,6 @@ public interface IBookRepository
     Task<IEnumerable<Book>> GetAllAsync();
 
     Task<int> Add(Book book);
-
-
+    Task<Book> GetByIdAsync(int id);
+    Task Delete(Book book);
 }

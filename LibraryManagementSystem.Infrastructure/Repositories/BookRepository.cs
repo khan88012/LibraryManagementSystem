@@ -14,6 +14,12 @@ internal class BookRepository(BookDbContext dbContext) : IBookRepository
         return book.BookID;
     }
 
+    public async Task Delete(Book book)
+    {
+        dbContext.Remove(book);
+        await dbContext.SaveChangesAsync();
+    }
+
     public async Task<IEnumerable<Book>> FilterBooks(string? Title, string? Author, string? Genre)
     {
         int? AuthorId = dbContext.Author.FirstOrDefault(a => a.Name == Author)?.AuthorID;
@@ -39,5 +45,12 @@ internal class BookRepository(BookDbContext dbContext) : IBookRepository
     {
         var books = await dbContext.Books.Include(book => book.Author).Include(book => book.Genre).ToListAsync();
         return books;
+    }
+
+    public async Task<Book> GetByIdAsync(int id)
+    {
+        var book = await dbContext.Books.Include(book => book.Author).Include(book => book.Genre).FirstOrDefaultAsync(b => b.BookID == id);
+        return book!;                                                                                            
+     
     }
 }

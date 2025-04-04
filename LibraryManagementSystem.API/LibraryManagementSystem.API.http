@@ -35,3 +35,8 @@ Content-Type: application/json
 
 
 ###
+
+@id=9
+DELETE {{LibraryManagementSystem.API_HostAddress}}/api/book/{{id}}
+
+###

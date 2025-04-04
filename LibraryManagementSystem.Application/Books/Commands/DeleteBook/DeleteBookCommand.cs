@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using MediatR;
 
-namespace LibraryManagementSystem.Application.Books.Commands.DeleteBook
+namespace LibraryManagementSystem.Application.Books.Commands.DeleteBook;
+
+public class DeleteBookCommand(int id) : IRequest<bool>
 {
-    internal class DeleteBookCommand
-    {
-    }
+    public int Id { get; } = id;
 }
