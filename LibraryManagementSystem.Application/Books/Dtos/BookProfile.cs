@@ -1,6 +1,7 @@
 ﻿
 using AutoMapper;
 using LibraryManagementSystem.Application.Books.Commands.AddBook;
+using LibraryManagementSystem.Application.Books.Commands.UpdateBook;
 using LibraryManagementSystem.Domain.Entities;
 
 namespace LibraryManagementSystem.Application.Books.Dtos;
@@ -15,6 +16,8 @@ public class BookProfile : Profile
         CreateMap<AddBookCommand, Book>()
             .ForMember(b => b.AuthorID, opt => opt.MapFrom(src => src.AuthorID))
             .ForMember(b => b.GenreID, opt => opt.MapFrom(src => src.GenreID));
+
+        CreateMap<UpdateBookCommand, Book>();
 
 
     }

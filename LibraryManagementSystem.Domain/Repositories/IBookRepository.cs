@@ -10,4 +10,6 @@ public interface IBookRepository
     Task<int> Add(Book book);
     Task<Book> GetByIdAsync(int id);
     Task Delete(Book book);
+ 
+    Task SaveChanges();
 }

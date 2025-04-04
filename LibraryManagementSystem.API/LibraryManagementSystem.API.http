@@ -40,3 +40,21 @@ Content-Type: application/json
 DELETE {{LibraryManagementSystem.API_HostAddress}}/api/book/{{id}}
 
 ###
+
+PATCH {{LibraryManagementSystem.API_HostAddress}}/api/book/8
+Content-Type: application/json
+
+{
+  "title": "The Fault in Our Stars2",
+  "isbn": "978-0142424179",
+  "language": "English",
+  "edition": "First",
+  "totalCopies": 20,
+  "availableCopies": 21,
+  "shelfLocation": "C1",
+  "status": "Available",
+  "authorID": 1,
+  "genreID": 3
+}
+
+###

@@ -53,4 +53,9 @@ internal class BookRepository(BookDbContext dbContext) : IBookRepository
         return book!;                                                                                            
      
     }
+
+    public async Task SaveChanges()
+    {
+       await dbContext.SaveChangesAsync();
+    }
 }

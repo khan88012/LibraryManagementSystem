@@ -2,6 +2,7 @@
 
 using LibraryManagementSystem.Application.Books.Commands.AddBook;
 using LibraryManagementSystem.Application.Books.Commands.DeleteBook;
+using LibraryManagementSystem.Application.Books.Commands.UpdateBook;
 using LibraryManagementSystem.Application.Books.Queries.GetAllBooks;
 using LibraryManagementSystem.Application.Books.Queries.SearchBook;
 using MediatR;
@@ -40,6 +41,20 @@ public class BookController(IMediator mediator) : ControllerBase
         var isDeleted = await mediator.Send(new DeleteBookCommand(id));
 
         if (isDeleted)
+        {
+            return NoContent();
+        }
+
+        return NotFound();
+
+    }
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> UpdateBook([FromRoute] int id, [FromBody] UpdateBookCommand command)
+    {
+        command.id = id;
+        var isUpdate = await mediator.Send(command);
+
+        if (isUpdate)
         {
             return NoContent();
         }
