@@ -7,3 +7,12 @@
 GET {{LibraryManagementSystem.API_HostAddress}}/api/book
 
 ###
+
+@title = The Great Gatsby
+GET {{LibraryManagementSystem.API_HostAddress}}/api/book/search?title={{title}}&author=&genre=Classic
+
+###
+
+
+
+###
