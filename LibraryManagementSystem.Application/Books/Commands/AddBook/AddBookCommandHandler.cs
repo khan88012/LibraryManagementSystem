@@ -13,8 +13,7 @@ public class AddBookCommandHandler(ILogger<AddBookCommandHandler> logger, IMappe
     {
         logger.LogInformation("Adding a book.");
         var book = mapper.Map<Book>(request);
-        //int id = await bookRepository.Add(book);
-        //return id;
-        return 1;
+        int id = await bookRepository.Add(book);
+        return id;
     }
 }

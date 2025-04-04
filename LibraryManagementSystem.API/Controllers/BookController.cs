@@ -1,5 +1,6 @@
 ﻿
 
+using LibraryManagementSystem.Application.Books.Commands.AddBook;
 using LibraryManagementSystem.Application.Books.Queries.GetAllBooks;
 using LibraryManagementSystem.Application.Books.Queries.SearchBook;
 using MediatR;
@@ -23,5 +24,12 @@ public class BookController(IMediator mediator) : ControllerBase
         var query = new SearchBookQuery { Title = title, Author = author, Genre = genre };
         var books = await mediator.Send(query);
         return Ok(books);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AddBook([FromBody] AddBookCommand command)
+    {
+        var bookId = await mediator.Send(command);
+        return CreatedAtAction(nameof(GetAll), new { id = bookId }, null);
     }
 }

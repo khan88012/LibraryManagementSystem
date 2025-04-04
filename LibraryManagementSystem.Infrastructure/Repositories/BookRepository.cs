@@ -7,6 +7,13 @@ namespace LibraryManagementSystem.Infrastructure.Repositories;
 
 internal class BookRepository(BookDbContext dbContext) : IBookRepository
 {
+    public async Task<int> Add(Book book)
+    {
+        dbContext.Books.Add(book);
+        await dbContext.SaveChangesAsync();
+        return book.BookID;
+    }
+
     public async Task<IEnumerable<Book>> FilterBooks(string? Title, string? Author, string? Genre)
     {
         int? AuthorId = dbContext.Author.FirstOrDefault(a => a.Name == Author)?.AuthorID;

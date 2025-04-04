@@ -8,11 +8,30 @@ GET {{LibraryManagementSystem.API_HostAddress}}/api/book
 
 ###
 
-@title = The Great Gatsby
-GET {{LibraryManagementSystem.API_HostAddress}}/api/book/search?title={{title}}&author=&genre=Classic
+@author = F. Scott Fitzgerald
+GET {{LibraryManagementSystem.API_HostAddress}}/api/book/search?author={{author}}
 
 ###
 
+
+
+###
+
+POST {{LibraryManagementSystem.API_HostAddress}}/api/book
+Content-Type: application/json
+
+ {
+  "title": "The Fault in Our Stars",
+  "isbn": "978-0142424179",
+  "language": "English",
+  "edition": "First",
+  "totalCopies": 20,
+  "availableCopies": 20,
+  "shelfLocation": "C1",
+  "status": "Available",
+  "authorID": 1,
+  "genreID": 2
+}
 
 
 ###

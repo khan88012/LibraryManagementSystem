@@ -13,19 +13,9 @@ public class BookProfile : Profile
 
 
         CreateMap<AddBookCommand, Book>()
-            .ForMember(b => b.Author, opt => opt.MapFrom(
-            src => new Author
-            {
-                AuthorID = src.AuthorID,
-            }
-            ))
-            .ForMember(b => b.Genre, opt => opt.MapFrom(
-            src => new Genre
-            {
-                GenreID = src.GenreID,
-            }
-            ))
-            ;
-            
+            .ForMember(b => b.AuthorID, opt => opt.MapFrom(src => src.AuthorID))
+            .ForMember(b => b.GenreID, opt => opt.MapFrom(src => src.GenreID));
+
+
     }
 }
