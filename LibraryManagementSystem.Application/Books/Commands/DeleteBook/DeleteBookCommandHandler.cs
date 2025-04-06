@@ -1,22 +1,23 @@
 ﻿
 
+using LibraryManagementSystem.Domain.Entities;
+using LibraryManagementSystem.Domain.Exceptions;
 using LibraryManagementSystem.Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace LibraryManagementSystem.Application.Books.Commands.DeleteBook;
 
-public class DeleteBookCommandHandler(ILogger<DeleteBookCommandHandler> logger, IBookRepository bookRepository) : IRequestHandler<DeleteBookCommand, bool>
+public class DeleteBookCommandHandler(ILogger<DeleteBookCommandHandler> logger, IBookRepository bookRepository) : IRequestHandler<DeleteBookCommand>
 {
-    public async Task<bool> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
+    public async Task Handle(DeleteBookCommand request, CancellationToken cancellationToken)
     {
         logger.LogInformation($"Deleting book with id : {request.Id}");
         var book = await bookRepository.GetByIdAsync(request.Id);
         if (book == null)
         {
-            return false;
+            throw new NotFoundException(nameof(Book).ToString(), request.Id.ToString());
         }
         await bookRepository.Delete(book);
-        return true;
     }
 }

@@ -1,3 +1,4 @@
+using LibraryManagementSystem.API.Middlewares;
 using LibraryManagementSystem.Application.Extensions;
 using LibraryManagementSystem.Infrastructure.Extensions;
 using LibraryManagementSystem.Infrastructure.Seeders;
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<ErrorHandlingMiddle>();
 builder.Services.AddApplication();
 
 builder.Services.AddInfrastructure(builder.Configuration);
@@ -18,8 +20,9 @@ var scope = app.Services.CreateScope();
 var seeder = scope.ServiceProvider.GetRequiredService<IBookSeeder>();
 await seeder.Seed();
 // Configure the HTTP request pipeline.
+app.UseMiddleware<ErrorHandlingMiddle>();
 
-if(app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();

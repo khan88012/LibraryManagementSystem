@@ -39,13 +39,7 @@ public class BookController(IMediator mediator) : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteBook([FromRoute] int id)
     {
-        var isDeleted = await mediator.Send(new DeleteBookCommand(id));
-
-        if (isDeleted)
-        {
-            return NoContent();
-        }
-
+        await mediator.Send(new DeleteBookCommand(id));
         return NotFound();
 
     }
@@ -56,13 +50,7 @@ public class BookController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> UpdateBook([FromRoute] int id, [FromBody] UpdateBookCommand command)
     {
         command.id = id;
-        var isUpdate = await mediator.Send(command);
-
-        if (isUpdate)
-        {
-            return NoContent();
-        }
-
+        await mediator.Send(command);
         return NotFound();
 
     }

@@ -4,7 +4,7 @@ using MediatR;
 
 namespace LibraryManagementSystem.Application.Books.Commands.UpdateBook;
 
-public class UpdateBookCommand : IRequest<bool>
+public class UpdateBookCommand : IRequest
 {
         public int id { get; set; }
         public string Title { get; set; } = default!;
