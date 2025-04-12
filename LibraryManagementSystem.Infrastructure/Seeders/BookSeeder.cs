@@ -8,6 +8,11 @@ internal class BookSeeder(BookDbContext dbContext) : IBookSeeder
 {
     public async Task Seed()
     {
+        if(dbContext.Database.GetPendingMigrations().Any()) //if there are any pending migration , we have created an azure sql database thats why need migration
+        {
+            await dbContext.Database.MigrateAsync();
+        }
+
         if (await dbContext.Database.CanConnectAsync()) 
         {
             if (!dbContext.Author.Any()) 
