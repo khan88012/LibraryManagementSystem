@@ -1,5 +1,6 @@
 ﻿
 
+
 namespace LibraryManagementSystem.Domain.Entities;
 
 public class Book
@@ -20,4 +21,5 @@ public class Book
     // Navigation Properties
     public Author Author { get; set; } = default!;
     public Genre Genre { get; set; } = default!;
+    public string? CoverImage { get; set; }
 }
