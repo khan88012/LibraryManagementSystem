@@ -1,6 +1,9 @@
 ﻿
 
+using LibraryManagementSystem.Domain.Interfaces;
+using LibraryManagementSystem.Infrastructure.Configuration;
 using LibraryManagementSystem.Infrastructure.Seeders;
+using LibraryManagementSystem.Infrastructure.Storage;
 
 namespace LibraryManagementSystem.Infrastructure.Extensions;
 
@@ -14,6 +17,9 @@ public static class ServiceCollectionExtensions
             services.AddScoped<IBookSeeder, BookSeeder>();
 
             services.AddScoped<IBookRepository, BookRepository>();
-        }
+
+        services.Configure<BlobStorageSettings>(configuration.GetSection("BlobStorage"));
+        services.AddScoped<IBlobStorageService, BlobStorageService>();
+    }
     
 }

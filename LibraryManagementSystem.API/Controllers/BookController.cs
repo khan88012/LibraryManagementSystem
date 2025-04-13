@@ -3,10 +3,12 @@
 using LibraryManagementSystem.Application.Books.Commands.AddBook;
 using LibraryManagementSystem.Application.Books.Commands.DeleteBook;
 using LibraryManagementSystem.Application.Books.Commands.UpdateBook;
+using LibraryManagementSystem.Application.Books.Commands.UploadCoverImage;
 using LibraryManagementSystem.Application.Books.Dtos;
 using LibraryManagementSystem.Application.Books.Queries.GetAllBooks;
 using LibraryManagementSystem.Application.Books.Queries.SearchBook;
 using MediatR;
+using Microsoft.AspNetCore.Routing.Constraints;
 
 namespace LibraryManagementSystem.API.Controllers;
 
@@ -52,6 +54,26 @@ public class BookController(IMediator mediator) : ControllerBase
         command.id = id;
         await mediator.Send(command);
         return NotFound();
+
+    }
+
+    [HttpPost("{id}/coverimage")]
+    public async Task<IActionResult> UploadCoverImage([FromRoute] int id, IFormFile file)
+    {
+        using var stream = file.OpenReadStream();
+        var command = new UploadBookCoverImageCommand()
+        {
+            BookId = id,
+            FileName = file.FileName,
+            File = stream
+
+        };
+        var isUploaded = await mediator.Send(command);
+        if (!isUploaded)
+        {
+            return NotFound();
+        }
+        return NoContent();
 
     }
 }
